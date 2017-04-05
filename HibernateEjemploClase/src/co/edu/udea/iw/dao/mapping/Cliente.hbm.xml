@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/03/2017 09:05:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="co.edu.udea.iw.dto.Cliente" table="clientes">
+  <id name="cedula" type="java.lang.String">
+   <column length="15" name="CEDULA"/>
+   <generator class="assigned"/>
+  </id>
+  <property name="nombres" type="java.lang.String">
+   <column length="30" name="NOMBRES" not-null="true"/>
+  </property>
+  <property name="apellidos" type="java.lang.String">
+   <column name="APELLIDOS" length="30" not-null="true"/>
+  </property>
+  <property name="email" type="java.lang.String">
+   <column name="EMAIL" length="20" not-null="true"/>
+  </property>
+  <many-to-one class="co.edu.udea.iw.dto.Usuario" fetch="select" name="usuarioCrea">
+   <column name="USUARIOCREA"/>
+  </many-to-one>
+  <property name="fechaCreacion" type="java.util.Date">
+   <column name="FECHACREACION"/>
+  </property>
+  <many-to-one class="co.edu.udea.iw.dto.Usuario" fetch="select" name="usuarioModifica">
+   <column name="USUARIOMODIFICA"/>
+  </many-to-one>
+  <property name="fechaModificacion" type="java.util.Date">
+   <column name="FECHAMODIFICACION"/>
+  </property>
+  <property name="eliminado" type="java.lang.Boolean">
+   <column name="ELIMINADO"/>
+  </property>
+  <many-to-one class="co.edu.udea.iw.dto.Usuario" fetch="select" name="usuarioElimina">
+   <column name="USUARIOELIMINA"/>
+  </many-to-one>
+  <property name="fechaEliminacion" type="java.util.Date">
+   <column name="FECHAELIMINACION"/>
+  </property>
+  
+  <set name="direcciones" fetch="join">
+  	<key column="cliente"></key>
+  	<one-to-many class="co.edu.udea.iw.dto.Direccion"/>
+  </set>
+ </class>
+</hibernate-mapping>
